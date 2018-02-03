@@ -21,11 +21,7 @@ public class DetailSchoolsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_schools);
 
-        List<School> schools = new ArrayList<School>();
-        schools.add(new School("fdsf","fdsf",11,1));
-        schools.add(new School("kjkk","cc",11,2));
-        schools.add(new School("rere","rrer",1,1));
-        schools.add(new School("nom","adress",21212,1));
+        ArrayList<School> schools = getIntent().getExtras().getParcelableArrayList("schools");
 
         RecyclerView recyclerView = findViewById(R.id.rcv_details_schools);
 
