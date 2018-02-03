@@ -8,12 +8,15 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
     private ArrayList<School> schools;
@@ -27,9 +30,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-
         schools = getIntent().getExtras().getParcelableArrayList("schools");
-
     }
 
 
@@ -45,14 +46,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
         for (School school : schools) {
             LatLng latLngSchool = new LatLng(Double.valueOf(school.getLatitude()),Double.valueOf(school.getLongitude()));
-            mMap.addMarker(new MarkerOptions().position(latLngSchool).title(school.getNom()));
+            if(school.getNbEleve()<150){
+                mMap.addMarker(new MarkerOptions().position(latLngSchool).title(school.getNom()).snippet(school.getAddresse()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+            }else if(school.getNbEleve()<300){
+                mMap.addMarker(new MarkerOptions().position(latLngSchool).title(school.getNom()).snippet(school.getAddresse()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+            }else{
+                mMap.addMarker(new MarkerOptions().position(latLngSchool).title(school.getNom()).snippet(school.getAddresse()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+            }
         }
-        LatLng latLngSchool = new LatLng(Double.valueOf(schools.get(0).getLatitude()),Double.valueOf(schools.get(0).getLongitude()));
-        // Add a marker in Sydney and move the camera
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLngSchool));
 
+        // Make the focus on Lyon and zoom in
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(45.752845,4.888221),11));
+        mMap.setOnMarkerClickListener(this);
+
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+       mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(),15));
+       return true;
     }
 }
