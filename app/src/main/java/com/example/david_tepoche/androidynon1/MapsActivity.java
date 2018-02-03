@@ -3,6 +3,7 @@ package com.example.david_tepoche.androidynon1;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
+import com.example.david_tepoche.androidynon1.model.School;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -10,9 +11,12 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private ArrayList<School> schools;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +26,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
+        schools = getIntent().getExtras().getParcelableArrayList("schools");
+
     }
 
 
@@ -38,9 +46,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        for (School school : schools) {
+            LatLng latLngSchool = new LatLng(Double.valueOf(school.getLatitude()),Double.valueOf(school.getLongitude()));
+            mMap.addMarker(new MarkerOptions().position(latLngSchool).title(school.getNom()));
+        }
+        LatLng latLngSchool = new LatLng(Double.valueOf(schools.get(0).getLatitude()),Double.valueOf(schools.get(0).getLongitude()));
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLngSchool));
+
     }
 }

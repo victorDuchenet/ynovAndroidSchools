@@ -40,9 +40,9 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".DetailSchoolsActivity" />
-        <activity android:name=".adapters.DetailSchoolsAdapter"
-            android:label="Voici les ecoles"></activity>
+        <activity
+            android:name=".DetailSchoolsActivity"
+            android:label="Voici les ecoles" />
     </application>
 
 </manifest>

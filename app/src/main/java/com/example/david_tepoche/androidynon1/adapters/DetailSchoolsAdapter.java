@@ -1,5 +1,7 @@
 package com.example.david_tepoche.androidynon1.adapters;
 
+import android.graphics.Color;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +29,11 @@ public class DetailSchoolsAdapter extends RecyclerView.Adapter<DetailSchoolsAdap
         holder.txvSchoolName.setText(school.getNom());
         holder.txvSchoolnbStudent.setText(String.valueOf(school.getNbEleve()));
         holder.txvSchoolLocation.setText(school.getAddresse());
+        if(school.getNbEleve()< 150){
+            holder.lytNbStudentsInfo.setBackgroundColor(Color.GREEN);
+        }else if (school.getNbEleve() < 300) {
+            holder.lytNbStudentsInfo.setBackgroundColor(Color.rgb(255, 106, 34));
+        }
     }
 
     @Override
@@ -41,12 +48,14 @@ public class DetailSchoolsAdapter extends RecyclerView.Adapter<DetailSchoolsAdap
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView txvSchoolName, txvSchoolLocation, txvSchoolnbStudent;
+        public ConstraintLayout lytNbStudentsInfo;
 
         public MyViewHolder(View view) {
             super(view);
             txvSchoolLocation =  view.findViewById(R.id.txv_location);
             txvSchoolName =  view.findViewById(R.id.txv_school_name);
             txvSchoolnbStudent = view.findViewById(R.id.txv_nb_student);
+            lytNbStudentsInfo = view.findViewById(R.id.layout_Background_NbStudents);
         }
     }
 }

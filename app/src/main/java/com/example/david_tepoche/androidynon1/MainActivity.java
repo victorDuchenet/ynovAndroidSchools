@@ -61,15 +61,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+
+        Intent intent = null;
         if (v.getId() == R.id.btn_list_school) {
-            Intent intentActivitySchoolsDetail = new Intent(MainActivity.this, DetailSchoolsActivity.class);
-            intentActivitySchoolsDetail.putParcelableArrayListExtra("schools", schoolsArray);
-            startActivity(intentActivitySchoolsDetail);
+            intent = new Intent(MainActivity.this, DetailSchoolsActivity.class);
         }
         if (v.getId() == R.id.btn_map_school) {
-            Intent intentMapActivity = new Intent(MainActivity.this, MapsActivity.class);
-            startActivity(intentMapActivity);
+            intent = new Intent(MainActivity.this, MapsActivity.class);
         }
+        intent.putParcelableArrayListExtra("schools", schoolsArray);
+        startActivity(intent);
     }
 }
 
