@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.david_tepoche.androidynon1.model.School;
-import com.example.david_tepoche.androidynon1.rest.DetailSchoolsActivity;
 import com.example.david_tepoche.androidynon1.rest.ISchoolService;
 
 import java.util.List;
@@ -16,9 +15,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public List<School> schools;
+
+    private Button btnDetailSchools;
+    private Button btnMapSchools;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,22 +39,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onFailure(Call<List<School>> call, Throwable t) {
-                
+
             }
         });
+
+        btnDetailSchools = findViewById(R.id.btn_list_school);
+        btnMapSchools = findViewById(R.id.btn_map_school);
+
+        btnMapSchools.setOnClickListener(this);
+        btnDetailSchools.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.btn_list_school){
+        if (v.getId() == R.id.btn_list_school) {
             Intent intentActivitySchoolsDetail = new Intent(MainActivity.this, DetailSchoolsActivity.class);
             startActivity(intentActivitySchoolsDetail);
         }
-        if(v.getId() == R.id.btn_map_school){
+        if (v.getId() == R.id.btn_map_school) {
             Intent intentMapActivity = new Intent(MainActivity.this, MapsActivity.class);
             startActivity(intentMapActivity);
         }
-
     }
 }
 

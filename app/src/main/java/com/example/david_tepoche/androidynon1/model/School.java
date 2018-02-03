@@ -14,6 +14,14 @@ public class School {
     private String longitude;
 
     public School() {
+
+    }
+
+    public School(String nom, String addresse, Integer nbEleve, Integer status) {
+        this.nom = nom;
+        this.addresse = addresse;
+        this.nbEleve = nbEleve;
+        this.status = status;
     }
 
     public String getNom() {

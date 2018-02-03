@@ -40,8 +40,8 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".rest.DetailSchoolsActivity" />
-        <activity android:name=".adapters.detailSchoolsAdapter"
+        <activity android:name=".DetailSchoolsActivity" />
+        <activity android:name=".adapters.DetailSchoolsAdapter"
             android:label="Voici les ecoles"></activity>
     </application>
 

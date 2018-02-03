@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.david_tepoche.androidynon1.rest.DetailSchoolsActivity">
+    android:background="@android:color/darker_gray"
+    tools:context="com.example.david_tepoche.androidynon1.DetailSchoolsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ListView
-            android:id="@+id/ltv_details_schools"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcv_details_schools"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
