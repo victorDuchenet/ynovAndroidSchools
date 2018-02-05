@@ -65,9 +65,19 @@ public class DetailSchoolsAdapter extends RecyclerView.Adapter<DetailSchoolsAdap
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(view.getContext(), MapsActivity.class);
+
+            SetFocusInOneSchool(schools, getAdapterPosition());
             schools.get(getAdapterPosition()).setFocus(true);
             intent.putParcelableArrayListExtra("schools", schools);
             view.getContext().startActivity(intent);
+        }
+
+        private void SetFocusInOneSchool(ArrayList<School> schools, int adapterPosition) {
+            for (School school: schools) {
+                school.setFocus(false);
+            }
+
+            schools.get(adapterPosition).setFocus(true);
         }
     }
 }

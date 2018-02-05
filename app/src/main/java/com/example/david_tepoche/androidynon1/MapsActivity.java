@@ -48,28 +48,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         for (School school : schools) {
-            LatLng latLngSchool = new LatLng(Double.valueOf(school.getLatitude()),Double.valueOf(school.getLongitude()));
-            if(school.getNbEleve()<150){
+            LatLng latLngSchool = new LatLng(Double.valueOf(school.getLatitude()), Double.valueOf(school.getLongitude()));
+            if (school.getNbEleve() < 150) {
                 mMap.addMarker(new MarkerOptions().position(latLngSchool).title(school.getNom()).snippet(school.getAddresse()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-            }else if(school.getNbEleve()<300){
+            } else if (school.getNbEleve() < 300) {
                 mMap.addMarker(new MarkerOptions().position(latLngSchool).title(school.getNom()).snippet(school.getAddresse()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
-            }else{
+            } else {
                 mMap.addMarker(new MarkerOptions().position(latLngSchool).title(school.getNom()).snippet(school.getAddresse()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
             }
         }
-           School schoolFocused =  GetFocusedSchool(schools);
-        // Make the focus on Lyon and zoom in
-        if(schoolFocused != null){
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.valueOf(schoolFocused.getLatitude()),Double.valueOf(schoolFocused.getLongitude())),11));
-        }else{
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(45.752845,4.888221),11));
+
+        School schoolFocused = GetFocusedSchool(schools);
+        if (schoolFocused != null) {
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.valueOf(schoolFocused.getLatitude()), Double.valueOf(schoolFocused.getLongitude())), 15));
+        } else {
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(45.752845, 4.888221), 11));
         }
         mMap.setOnMarkerClickListener(this);
     }
 
     private School GetFocusedSchool(ArrayList<School> schools) {
-        for (School school: schools) {
-            if(school.isFocus()){
+        for (School school : schools) {
+            if (school.isFocus()) {
                 return school;
             }
         }
@@ -78,7 +78,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-       mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(),15));
-       return true;
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 15));
+        return true;
     }
 }
