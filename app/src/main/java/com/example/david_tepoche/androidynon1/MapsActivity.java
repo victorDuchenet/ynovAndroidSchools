@@ -4,6 +4,7 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
 import com.example.david_tepoche.androidynon1.model.School;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -56,11 +57,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.addMarker(new MarkerOptions().position(latLngSchool).title(school.getNom()).snippet(school.getAddresse()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
             }
         }
-
+           School schoolFocused =  GetFocusedSchool(schools);
         // Make the focus on Lyon and zoom in
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(45.752845,4.888221),11));
+        if(schoolFocused != null){
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.valueOf(schoolFocused.getLatitude()),Double.valueOf(schoolFocused.getLongitude())),11));
+        }else{
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(45.752845,4.888221),11));
+        }
         mMap.setOnMarkerClickListener(this);
+    }
 
+    private School GetFocusedSchool(ArrayList<School> schools) {
+        for (School school: schools) {
+            if(school.isFocus()){
+                return school;
+            }
+        }
+        return null;
     }
 
     @Override

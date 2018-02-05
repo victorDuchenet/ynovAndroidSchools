@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ynovAndroidSchools.iml" filepath="$PROJECT_DIR$/ynovAndroidSchools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ynovAndroidSchools.iml" filepath="$PROJECT_DIR$/.idea/ynovAndroidSchools.iml" />
+      <module fileurl="file://C:\WorkSpaceDuchenet\Android\ynovAndroidSchools\ynovAndroidSchools.iml" filepath="C:\WorkSpaceDuchenet\Android\ynovAndroidSchools\ynovAndroidSchools.iml" />
     </modules>
   </component>
 </project>
