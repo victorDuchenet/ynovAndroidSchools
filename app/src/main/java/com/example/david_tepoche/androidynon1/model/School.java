@@ -15,16 +15,9 @@ public class School implements Parcelable{
     private Integer status;
     private String latitude;
     private String longitude;
+    private boolean focus;
 
     public School() {
-
-    }
-
-    public School(String nom, String addresse, Integer nbEleve, Integer status) {
-        this.nom = nom;
-        this.addresse = addresse;
-        this.nbEleve = nbEleve;
-        this.status = status;
     }
 
     public School(Parcel parcel){
@@ -34,6 +27,8 @@ public class School implements Parcelable{
         status = Integer.valueOf(parcel.readString());
         latitude = parcel.readString();
         longitude = parcel.readString();
+        focus = Boolean.valueOf(parcel.readString());
+
     }
 
     public String getNom() {
@@ -84,6 +79,14 @@ public class School implements Parcelable{
         this.longitude = longitude;
     }
 
+    public boolean isFocus() {
+        return focus;
+    }
+
+    public void setFocus(boolean focus) {
+        this.focus = focus;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -97,6 +100,7 @@ public class School implements Parcelable{
         parcel.writeString(String.valueOf(status));
         parcel.writeString(latitude);
         parcel.writeString(longitude);
+        parcel.writeString(String.valueOf(focus));
     }
 
     public static final Parcelable.Creator<School> CREATOR = new Parcelable.Creator<School>() {
